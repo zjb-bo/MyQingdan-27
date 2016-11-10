@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e1e1e1"
+    >
+
+    <include
+        layout="@layout/good_detail_title"/>
+
+    <com.qingdan.myqingdan.gui.view.MyMaterialRefushLayout
+        android:id="@id/ranking_more_reflush"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+       <ScrollView
+           android:id="@+id/rangk_more_scrollview"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical">
+               <ImageView
+                   android:layout_width="match_parent"
+                   android:layout_height="220dp"
+                   android:src="@drawable/img_topic_of_all_top"
+                   android:scaleType="fitXY"/>
+
+               <com.qingdan.myqingdan.gui.view.MyListView
+                   android:id="@id/ranking_more_listview"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:dividerHeight="20dp"
+                   android:padding="10dp"
+                   android:scrollbars="none"
+                   android:divider="#e1e1e1"
+                   >
+               </com.qingdan.myqingdan.gui.view.MyListView>
+           </LinearLayout>
+       </ScrollView>
+
+    </com.qingdan.myqingdan.gui.view.MyMaterialRefushLayout>
+
+
+</LinearLayout>

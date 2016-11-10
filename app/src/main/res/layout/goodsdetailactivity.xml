@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_article"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            layout="@layout/good_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </include>
+
+        <com.cjj.MaterialRefreshLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:overlay="false"
+            app:wave_color="@color/material_green"
+            >
+            <ScrollView
+                android:id="@+id/article_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <include
+                        layout="@layout/good_detail_content" />
+                    <WebView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@id/good_detail_webview">
+
+                    </WebView>
+
+                    <include
+                        layout="@layout/subview_comments"/>
+
+                    <include
+                        layout="@layout/good_detail_relatiedarticle"/>
+                </LinearLayout>
+
+            </ScrollView>
+        </com.cjj.MaterialRefreshLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="2dp"
+            android:background="#b1b1b1"/>
+        <include
+            layout="@layout/good_detail_footer"/>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/article_arrow_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_arrow_upward"
+        android:background="@drawable/ic_arrow_upward_bg"
+        android:layout_margin="60dp"/>
+</RelativeLayout>

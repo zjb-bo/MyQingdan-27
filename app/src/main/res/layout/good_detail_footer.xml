@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="40dp"
+    >
+
+
+    <LinearLayout
+        android:id="@id/goods_detail_footer_like"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/heart_grey_sm"/>
+
+        <TextView
+            android:id="@id/goods_detail_footer_textview_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="喜欢(20)"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/goods_detail_footer_comment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/review_button"/>
+
+        <TextView
+            android:id="@id/goods_detail_footer_textview_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="评论(20)"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@id/goods_detail_footer_share"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/share"/>
+
+        <TextView
+            android:id="@id/goods_detail_footer_textview_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="分享"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@id/goods_detail_footer_look"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:layout_weight="3"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="查看商品"
+            android:textSize="16sp"
+            android:background="@drawable/good_detail_footer_look"
+            android:textColor="#fff"
+            android:layout_marginRight="8dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

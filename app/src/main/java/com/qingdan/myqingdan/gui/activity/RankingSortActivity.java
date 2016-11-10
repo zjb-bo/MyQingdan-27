@@ -1,7 +1,6 @@
 package com.qingdan.myqingdan.gui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
@@ -124,7 +123,7 @@ public class RankingSortActivity extends BaseActivity implements RadioGroup.OnCh
     }
 
     /**
-     * RaidoGroup的子类选中监听
+     * RaidoGroup的子类选中监听jianting
      * @param group
      * @param checkedId
      */

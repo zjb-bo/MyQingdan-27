@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/good_detail_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_edit_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            >
+
+            <ImageView
+                android:id="@+id/ranking_sort_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/search" />
+
+            <EditText
+                android:id="@+id/ranking_sort_edit"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_weight="1"
+                android:imeOptions="actionSearch"
+                android:ellipsize="end"
+                android:hint="请输入关键字筛选商品"
+                android:maxLines="1"
+                android:textSize="14sp"
+                android:background="@null"
+                android:padding="5dp" />
+
+            <ImageView
+                android:id="@+id/ranking_sort_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                android:src="@drawable/delete_icon" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/rangking_sort_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_marginLeft="5dp"
+            android:text="取消"
+            android:textSize="15sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/ranking_sort_tag"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/ranking_sort_hot"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@color/color_radio"
+            android:checked="true"
+            android:gravity="center"
+            android:text="热门" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:background="#e1e1e1"/>
+
+        <RadioButton
+            android:id="@+id/ranking_sort_score"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@color/color_radio"
+            android:gravity="center"
+            android:text="评分" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:background="#e1e1e1"/>
+        <RadioButton
+            android:id="@+id/ranking_sort_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:textColor="@color/color_radio"
+            android:text="名称" />
+    </RadioGroup>
+
+
+    <FrameLayout
+        android:id="@+id/ranking_sort_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+    </FrameLayout>
+
+</LinearLayout>

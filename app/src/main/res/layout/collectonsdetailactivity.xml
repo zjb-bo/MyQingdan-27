@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/collection_details_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.cjj.MaterialRefreshLayout
+            android:id="@id/list_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@id/collections_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="1dp"
+                android:divider="@drawable/comment_dash_line"
+                >
+            </ListView>
+        </com.cjj.MaterialRefreshLayout>
+
+        <ImageView
+            android:id="@+id/_collection_arrow_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_arrow_upward"
+            android:background="@drawable/ic_arrow_upward_bg"
+            android:layout_margin="60dp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
