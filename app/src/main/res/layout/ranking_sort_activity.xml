@@ -56,12 +56,15 @@
 
         <TextView
             android:id="@id/rangking_sort_cancle"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:gravity="center"
+            android:background="@drawable/cancle_bg"
             android:layout_marginLeft="5dp"
             android:text="取消"
-            android:textSize="15sp"
+            android:textSize="12sp"
+            android:textColor="#fff"
             android:visibility="gone" />
     </LinearLayout>
 

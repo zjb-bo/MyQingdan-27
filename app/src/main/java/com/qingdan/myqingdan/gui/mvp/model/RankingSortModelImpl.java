@@ -29,7 +29,6 @@ public class RankingSortModelImpl implements RankingSortModelDao {
                 if(data.getData().getMeta().getPagination().getTotal_pages() ==
                         data.getData().getMeta().getPagination().getCurrent_page()){
                     callBack.noMoreData();
-                    return;
                 }
 
                 callBack.loadSortDataSuccess(data);

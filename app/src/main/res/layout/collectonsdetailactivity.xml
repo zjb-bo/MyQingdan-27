@@ -32,6 +32,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_arrow_upward"
+            android:visibility="gone"
             android:background="@drawable/ic_arrow_upward_bg"
             android:layout_margin="60dp"/>
 

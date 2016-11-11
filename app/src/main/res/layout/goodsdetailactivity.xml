@@ -24,7 +24,7 @@
             app:overlay="false"
             app:wave_color="@color/material_green"
             >
-            <ScrollView
+            <com.qingdan.myqingdan.gui.view.MyScorllView
                 android:id="@+id/article_scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -48,7 +48,7 @@
                         layout="@layout/good_detail_relatiedarticle"/>
                 </LinearLayout>
 
-            </ScrollView>
+            </com.qingdan.myqingdan.gui.view.MyScorllView>
         </com.cjj.MaterialRefreshLayout>
 
         <TextView
@@ -69,5 +69,6 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_arrow_upward"
         android:background="@drawable/ic_arrow_upward_bg"
+        android:visibility="gone"
         android:layout_margin="60dp"/>
 </RelativeLayout>

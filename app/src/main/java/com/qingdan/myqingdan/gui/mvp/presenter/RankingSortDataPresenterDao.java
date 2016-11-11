@@ -5,5 +5,7 @@ package com.qingdan.myqingdan.gui.mvp.presenter;
  */
 
 public interface RankingSortDataPresenterDao {
-    void loadSortData();
+    void refreshData(String key);
+
+    void loadSortData(String key);
 }

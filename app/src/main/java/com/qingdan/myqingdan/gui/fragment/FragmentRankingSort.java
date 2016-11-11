@@ -2,9 +2,11 @@ package com.qingdan.myqingdan.gui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +33,11 @@ public class FragmentRankingSort extends BaseFragment implements RankingSortData
     MyMaterialRefushLayout rankingfragmentReflush;
     private RankingSortPresentImpl mPresent;
     private RankingSortBaseAdapter mAdapter;
+    private String key = "";
+    private boolean isLoading = true;
+    private boolean isNoMoreData;
+    private View view;
+
 
     @Override
     protected int getContentViewResId() {
@@ -46,13 +53,28 @@ public class FragmentRankingSort extends BaseFragment implements RankingSortData
         return rootView;
     }
 
-    public static FragmentRankingSort newInstence(int tag,int rankingId){
+    public static FragmentRankingSort newInstence(int tag, int rankingId) {
         FragmentRankingSort fragment = new FragmentRankingSort();
         Bundle bundle = new Bundle();
-        bundle.putInt("tag",tag);
-        bundle.putInt("rankingId",rankingId);
+        bundle.putInt("tag", tag);
+        bundle.putInt("rankingId", rankingId);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    public void setSearchKey(String key) {
+        this.key = key;
+    }
+
+    public void showFragment(String key) {
+        if (this.key.equals(key)) {
+            return;
+        }
+        mAdapter.clearData();
+        mPresent.refreshData(key);
+        this.key = key;
+        isNoMoreData = false;
+
     }
 
     @Override
@@ -60,39 +82,77 @@ public class FragmentRankingSort extends BaseFragment implements RankingSortData
         super.onActivityCreated(savedInstanceState);
 
         Bundle arguments = getArguments();
-        int tag = arguments.getInt("tag",0);
-        int rankingId = arguments.getInt("rankingId",0);
+        int tag = arguments.getInt("tag", 0);
+        int rankingId = arguments.getInt("rankingId", 0);
 
-        mPresent = new RankingSortPresentImpl(tag,rankingId,this);
-        mPresent.loadSortData();
+        mPresent = new RankingSortPresentImpl(tag, rankingId, this);
+        mPresent.loadSortData(key);
+
+        view = LayoutInflater.from(getActivity()).inflate(R.layout.ranking_sort_footerview, rankingfragmentListview,false);
+        rankingfragmentListview.addFooterView(view);
 
         mAdapter = new RankingSortBaseAdapter(getActivity());
         rankingfragmentListview.setAdapter(mAdapter);
 
+        rankingfragmentListview.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (isNoMoreData) {
+                    return;
+                }
+                Log.d("FragmentRankingSort", "visibleItemCount:" + visibleItemCount+"  "+totalItemCount+" "+firstVisibleItem);
+
+
+                if (!isLoading && visibleItemCount == totalItemCount - firstVisibleItem) {
+                    mPresent.loadSortData(key);
+                    isLoading = true;
+                }
+            }
+        });
+
         rankingfragmentReflush.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                mPresent.loadSortData();
+                mPresent.loadSortData(key);
             }
         });
+
+
     }
 
     @Override
     public void showRankingSuccuse(RankingSortData data) {
+        isLoading = false;
+//        view.findViewById(R.id.linear_other).setVisibility(View.GONE);
+//        view.findViewById(R.id.text_failed).setVisibility(View.GONE);
+//        view.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
         rankingfragmentReflush.finishRefresh();
         mAdapter.addData(data.getData().getThings());
     }
 
     @Override
     public void showRankingFailed() {
+//        view.findViewById(R.id.linear_other).setVisibility(View.GONE);
+//        view.findViewById(R.id.text_failed).setVisibility(View.VISIBLE);
+//        view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+        mAdapter.notifyDataSetChanged();
         rankingfragmentReflush.finishRefresh();
         Toast.makeText(getActivity(), "OnEorror", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showNoMoreData() {
+//        view.findViewById(R.id.linear_other).setVisibility(View.VISIBLE);
+//        view.findViewById(R.id.text_failed).setVisibility(View.GONE);
+//        view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+        mAdapter.notifyDataSetChanged();
+        isNoMoreData = true;
         rankingfragmentReflush.finishRefresh();
         Toast.makeText(getActivity(), "NoMoreData", Toast.LENGTH_SHORT).show();
-
     }
 }

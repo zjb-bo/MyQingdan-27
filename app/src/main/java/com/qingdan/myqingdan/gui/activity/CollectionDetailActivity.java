@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -41,7 +42,7 @@ public class CollectionDetailActivity extends BaseActivity implements Collection
     private CollecitonDetailPresenterImpl presenter;
     private CollectionBaseAdapter adapter;
     private CollectionViewHolder holder;
-
+    private int currentVisbilityItem;
 
     @Override
     protected void initDatas() {
@@ -63,6 +64,26 @@ public class CollectionDetailActivity extends BaseActivity implements Collection
             @Override
             public void onClick(View v) {
                 collectionsDetail.smoothScrollToPosition(0);
+            }
+        });
+
+
+
+        collectionsDetail.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                 int totalItemCount) {
+                if(firstVisibleItem == 0){
+                    arrowUp.setVisibility(View.GONE);
+                }else if(firstVisibleItem > 0 && currentVisbilityItem > firstVisibleItem){
+                    arrowUp.setVisibility(View.VISIBLE);
+                }
+                currentVisbilityItem = firstVisibleItem;
             }
         });
     }

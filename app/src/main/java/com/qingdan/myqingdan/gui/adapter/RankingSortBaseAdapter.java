@@ -40,6 +40,7 @@ public class RankingSortBaseAdapter extends BaseAdapter {
 
     public void clearData(){
         this.list.clear();
+        notifyDataSetChanged();
     }
 
     public void setData(List<RankingSortData.DataBean.ThingsBean>  list){

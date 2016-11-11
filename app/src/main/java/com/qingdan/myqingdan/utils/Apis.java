@@ -26,9 +26,9 @@ public interface Apis {
     /***口碑相关***/
 
 //    热门url:
-    String URL_RANKING_HOT="http://api.eqingdan.com/v1/rankings/{0}/things?keyword=&sort=review-count-desc&page={1}&per={2}";
+    String URL_RANKING_HOT="http://api.eqingdan.com/v1/rankings/{0}/things?keyword={1}&sort=review-count-desc&page={2}&per=10";
 //    评分url：
-    String URL_RANKING_SCORE="http://api.eqingdan.com/v1/rankings/{0}/things?keyword=&sort=rating-score-desc&page={1}&per={2}";
+    String URL_RANKING_SCORE="http://api.eqingdan.com/v1/rankings/{0}/things?keyword={1}&sort=rating-score-desc&page={2}&per=10";
 //    名称url：
-    String URL_RANKING_NAME= "http://api.eqingdan.com/v1/rankings/{0}/things?keyword=&sort=brand-name-asc&page={1}&per={2}";
+    String URL_RANKING_NAME= "http://api.eqingdan.com/v1/rankings/{0}/things?keyword={1}&sort=brand-name-asc&page={2}&per=10";
 }

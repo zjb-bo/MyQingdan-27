@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckedTextView;
+import android.widget.Toast;
 
 import com.qingdan.myqingdan.R;
 import com.qingdan.myqingdan.gui.adapter.MainFragmentViewApapter;
@@ -14,6 +15,8 @@ import com.qingdan.myqingdan.gui.fragment.FragmentMine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     /*底部三个标签*/
@@ -96,4 +99,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mViewPager.setCurrentItem(index);
     }
 
+    private boolean isQuit = false;
+    @Override
+    public void onBackPressed() {
+        Timer timer = new Timer();
+        TimerTask task = null;
+        if (!isQuit){
+            isQuit = true;
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            if(task == null){
+                task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        isQuit = false;
+                    }
+                };
+            }
+            timer.schedule(task,3000);
+        }else {
+            timer = null;
+            task = null;
+            finish();
+        }
+
+
+
+    }
 }

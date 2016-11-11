@@ -54,7 +54,7 @@ public class RankingMoreBaseAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         RankingViewHolder holder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.ranking_more_item, null);
+            convertView = inflater.inflate(R.layout.ranking_more_item, parent,false);
             holder = new RankingViewHolder(convertView);
             convertView.setTag(holder);
         }else {

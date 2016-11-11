@@ -54,6 +54,7 @@ public class RankingSortActivity extends BaseActivity implements RadioGroup.OnCh
     RadioButton rankingSortName;
     private List<FragmentRankingSort> list;
     private FragmentManager mManager;
+    private String searchKey="";
 
     @Override
     protected void initDatas() {
@@ -85,6 +86,7 @@ public class RankingSortActivity extends BaseActivity implements RadioGroup.OnCh
                 }else{
                     rankingSortDelete.setVisibility(View.VISIBLE);
                 }
+                searchKey = s.toString();
             }
 
             @Override
@@ -104,22 +106,33 @@ public class RankingSortActivity extends BaseActivity implements RadioGroup.OnCh
         return R.layout.ranking_sort_activity;
     }
 
-    @OnClick({R.id.text_title, R.id.goods_detail_back, R.id.ranking_sort_search, R.id.ranking_sort_delete})
+    @OnClick({R.id.text_title, R.id.goods_detail_back, R.id.ranking_sort_search,
+            R.id.ranking_sort_delete,R.id.rangking_sort_cancle})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.goods_detail_back:
                 finish();
                 break;
             case R.id.ranking_sort_search:
+                doSearch(searchKey);
+                if(TextUtils.isEmpty(searchKey))return;
+                rangkingSortCancle.setVisibility(View.VISIBLE);
                 break;
             case R.id.ranking_sort_delete:
                 rankingSortEdit.getText().clear();
                 rankingSortDelete.setVisibility(View.GONE);
+                rangkingSortCancle.setVisibility(View.GONE);
                 break;
             case R.id.rangking_sort_cancle:
                 rangkingSortCancle.setVisibility(View.GONE);
+                rankingSortEdit.getText().clear();
+                doSearch("");
                 break;
         }
+    }
+
+    private void doSearch(String searchKey) {
+        currentFragment.showFragment(searchKey);
     }
 
     /**
@@ -139,7 +152,6 @@ public class RankingSortActivity extends BaseActivity implements RadioGroup.OnCh
             case R.id.ranking_sort_name:
                 showFragment(2);
                 break;
-
         }
     }
 
@@ -151,6 +163,8 @@ public class RankingSortActivity extends BaseActivity implements RadioGroup.OnCh
      * 显示选中的fragment
      * @param index
      */
+
+
     private void showFragment(int index) {
         FragmentTransaction transaction = mManager.beginTransaction();
         FragmentRankingSort fragment = list.get(index);
@@ -158,8 +172,10 @@ public class RankingSortActivity extends BaseActivity implements RadioGroup.OnCh
             return;
         }
         if(fragment.isAdded()){
+            fragment.showFragment(searchKey);
             transaction.show(fragment);
         }else{
+            fragment.setSearchKey(searchKey);
             transaction.add(R.id.ranking_sort_frame,fragment);
         }
 

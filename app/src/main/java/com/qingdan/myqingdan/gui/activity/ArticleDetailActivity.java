@@ -1,8 +1,8 @@
 package com.qingdan.myqingdan.gui.activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.cjj.MaterialRefreshLayout;
@@ -28,6 +27,7 @@ import com.qingdan.myqingdan.gui.mvp.presenter.ArticlePresenterDao;
 import com.qingdan.myqingdan.gui.mvp.presenter.ArticlePresenterImpl;
 import com.qingdan.myqingdan.gui.mvp.view.ArticlDetailViewDao;
 import com.qingdan.myqingdan.gui.view.MyGridView;
+import com.qingdan.myqingdan.gui.view.MyScorllView;
 
 import java.util.List;
 
@@ -39,7 +39,8 @@ import butterknife.OnClick;
  * Created by Administrator on 2016/11/2.
  */
 
-public class ArticleDetailActivity extends BaseActivity implements ArticlDetailViewDao, AdapterView.OnItemClickListener {
+public class ArticleDetailActivity extends BaseActivity implements ArticlDetailViewDao,
+        AdapterView.OnItemClickListener {
     @BindView(R.id.goods_detail_back)
     ImageView goodsDetailBack;
     @BindView(R.id.imageView_big_subview_article_title)
@@ -87,18 +88,19 @@ public class ArticleDetailActivity extends BaseActivity implements ArticlDetailV
     @BindView(R.id.article_arrow_up)
     ImageView articleArrowUp;
     @BindView(R.id.root_article)
-    RelativeLayout rootArticle;
+    RelativeLayout rootArtcle;
     @BindView(R.id.article_scrollview)
-    ScrollView articleScrollview;
+    MyScorllView articleScrollview;
     private ArticlePresenterDao presenter;
     private WebSettings settings;
     private MyGridViewBaseAdapter baseAdapter;
+    private int currentY;
+    ;
 
     @Override
     protected void initDatas() {
         Intent intent = getIntent();
         final int articleId = intent.getIntExtra("articleId", 0);
-
 
         relactiedArticlGridView.setNumColumns(2);
         baseAdapter = new MyGridViewBaseAdapter(this);
@@ -114,6 +116,20 @@ public class ArticleDetailActivity extends BaseActivity implements ArticlDetailV
         });
 
 
+        articleScrollview.setOnMyScrollViewListener(new MyScorllView.OnMyScrollViewListener() {
+            @Override
+            public void onScrollChanged(int x, int y, int oldx, int oldy) {
+                int disY = articleScrollview.getScrollY();
+                Log.d("ArticleDetailActivity", "disY + disY-currentY:" + disY + "  " +(disY - currentY));
+                if(disY > 500 && disY - currentY <= 0){
+                    articleArrowUp.setVisibility(View.VISIBLE);
+                }else{
+                    articleArrowUp.setVisibility(View.GONE);
+                }
+                currentY = disY;
+            }
+        });
+
 //        refreshLayout.autoRefresh();
         refreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -121,11 +137,6 @@ public class ArticleDetailActivity extends BaseActivity implements ArticlDetailV
                 presenter.loadArticleData(articleId);
             }
         });
-    }
-
-    @Override
-    protected void initBeforeSetView() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     @Override
@@ -142,9 +153,13 @@ public class ArticleDetailActivity extends BaseActivity implements ArticlDetailV
             }
         });
 
-        //判断19版本以上才设置pading  设置状态栏的
-        if (Build.VERSION.SDK_INT >= 19)
-            rootArticle.setPadding(0, getStatusHeight(), 0, 0);
+//        //判断19版本以上才设置pading  设置状态栏的
+//        if (Build.VERSION.SDK_INT >= 19)
+//            rootArticle.setPadding(0, getStatusHeight(), 0, 0);
+    }
+    @Override
+    protected void initBeforeSetView() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     @Override

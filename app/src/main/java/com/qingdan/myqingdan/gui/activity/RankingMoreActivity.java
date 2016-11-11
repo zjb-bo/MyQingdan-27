@@ -2,6 +2,7 @@ package com.qingdan.myqingdan.gui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -49,6 +50,8 @@ public class RankingMoreActivity extends BaseActivity implements RankingMoreView
     protected void initDatas() {
         rankings = new ArrayList<>();
         adapter = new RankingMoreBaseAdapter(this);
+        rankingMoreListview.addHeaderView(LayoutInflater.from(this).
+                inflate(R.layout.ranking_moredata_headerview,rankingMoreListview,false));
         rankingMoreListview.setAdapter(adapter);
         presenter = new RankingMoreDataPresenterImpl(this);
         presenter.loadRankingMoreData();
@@ -71,11 +74,14 @@ public class RankingMoreActivity extends BaseActivity implements RankingMoreView
                 if (isNoMoreData) {
                     return;
                 }
-                if (visibleItemCount == totalItemCount && !isLoading) {
+                if (visibleItemCount == totalItemCount - firstVisibleItem && !isLoading) {
                     presenter.loadRankingMoreData();
+                    isLoading = true;
                 }
             }
         });
+
+
     }
 
     @Override
@@ -127,6 +133,11 @@ public class RankingMoreActivity extends BaseActivity implements RankingMoreView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(position == 0){
+            return;
+        }else{
+            position -= 1;
+        }
         Intent intent = new Intent(this,RankingSortActivity.class);
         intent.putExtra("rankingId",rankings.get(position).getId());
         intent.putExtra("rankingName",rankings.get(position).getTitle());
