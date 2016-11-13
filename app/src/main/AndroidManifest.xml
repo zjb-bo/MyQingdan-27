@@ -26,6 +26,7 @@
         <activity android:name=".gui.activity.CollectionDetailActivity"/>
         <activity android:name=".gui.activity.RankingMoreActivity"/>
         <activity android:name=".gui.activity.RankingSortActivity"/>
+        <activity android:name=".gui.activity.RankingThingsDetailActivity"/>
     </application>
 
 </manifest>

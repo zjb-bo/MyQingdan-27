@@ -8,5 +8,21 @@
     <color name="tabIndicatorColor">#ff000000</color>
     <color name="tabSelectedTextColor">#ff000000</color>
     <color name="tabTextColor">#ff848484</color>
+    <color name="transparent_white">#66ffffff</color>
+    <color name="light_grey">#ffcccccc</color>
+    <color name="transparent_grey">#22444444</color>
+    <color name="color_purple_btn_clicked">#ff5f3f81</color>
+    <color name="black">#000000</color>
+    <color name="grey">#ff848484</color>
+    <color name="text_check_more">#ffc4c4c4</color>
+    <color name="great_category_bg_1">#55B9D3EE</color>
+    <color name="great_category_bg_2">#558EE5EE</color>
+    <color name="great_category_bg_3">#55CDC1C5</color>
+    <color name="great_category_bg_4">#55EEDFCC</color>
+
+    <color name="theme_color_text_balck">#ff434343</color>
+    <color name="theme_color_text_1">#ff999999</color>
+    <color name="theme_color_text_content_gray">#ff666666</color>
+    <color name="theme_color_text_desc_gray">#ff999999</color>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.qingdan.myqingdan.gui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.qingdan.myqingdan.R;
 import com.qingdan.myqingdan.entity.RankingSortData;
+import com.qingdan.myqingdan.gui.activity.RankingThingsDetailActivity;
 import com.qingdan.myqingdan.gui.adapter.RankingSortBaseAdapter;
 import com.qingdan.myqingdan.gui.mvp.presenter.RankingSortPresentImpl;
 import com.qingdan.myqingdan.gui.view.MyMaterialRefushLayout;
@@ -26,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/11/9.
  */
 
-public class FragmentRankingSort extends BaseFragment implements RankingSortDataViewDao {
+public class FragmentRankingSort extends BaseFragment implements RankingSortDataViewDao, AdapterView.OnItemClickListener {
     @BindView(R.id.rankingfragment_listview)
     ListView rankingfragmentListview;
     @BindView(R.id.rankingfragment_reflush)
@@ -94,6 +97,8 @@ public class FragmentRankingSort extends BaseFragment implements RankingSortData
         mAdapter = new RankingSortBaseAdapter(getActivity());
         rankingfragmentListview.setAdapter(mAdapter);
 
+        rankingfragmentListview.setOnItemClickListener(this);
+
         rankingfragmentListview.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -154,5 +159,22 @@ public class FragmentRankingSort extends BaseFragment implements RankingSortData
         isNoMoreData = true;
         rankingfragmentReflush.finishRefresh();
         Toast.makeText(getActivity(), "NoMoreData", Toast.LENGTH_SHORT).show();
+    }
+
+
+    /***
+     * 跳转到每一个商品的详细信息
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(), RankingThingsDetailActivity.class);
+        RankingSortData.DataBean.ThingsBean thingsBean =
+                (RankingSortData.DataBean.ThingsBean) mAdapter.getItem(position);
+        intent.putExtra("thingDetail",thingsBean);
+        startActivity(intent);
     }
 }

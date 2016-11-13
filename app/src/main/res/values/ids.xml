@@ -73,4 +73,9 @@
     <item name="tv_review_btn" type="id" />
     <item name="rating_score" type="id" />
     <item name="tv_score_num" type="id" />
+    <item name="things_listview" type="id" />
+    <item name="things_foot_review" type="id" />
+    <item name="things_foot_share" type="id" />
+    <item name="things_foot_comment" type="id" />
+    <item name="ratingbar" type="id" />
 </resources>

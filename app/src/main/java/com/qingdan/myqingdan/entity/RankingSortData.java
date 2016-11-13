@@ -1,12 +1,13 @@
 package com.qingdan.myqingdan.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/11/9.
  */
 
-public class RankingSortData {
+public class RankingSortData implements Serializable{
 
     /**
      * code : 0
@@ -47,7 +48,7 @@ public class RankingSortData {
         this.data = data;
     }
 
-    public static class DataBean {
+    public  class DataBean implements Serializable{
         /**
          * pagination : {"total":18,"count":10,"per_page":10,"current_page":1,"total_pages":2,"links":{"next":"http://api.eqingdan.com/v1/rankings/38/things?sort=&page=2"}}
          */
@@ -106,7 +107,7 @@ public class RankingSortData {
             this.things = things;
         }
 
-        public static class MetaBean {
+        public  class MetaBean implements Serializable{
             /**
              * total : 18
              * count : 10
@@ -126,7 +127,7 @@ public class RankingSortData {
                 this.pagination = pagination;
             }
 
-            public static class PaginationBean {
+            public  class PaginationBean implements Serializable{
                 private int total;
                 private int count;
                 private int per_page;
@@ -186,7 +187,7 @@ public class RankingSortData {
                     this.links = links;
                 }
 
-                public static class LinksBean {
+                public  class LinksBean implements Serializable{
                     private String next;
 
                     public String getNext() {
@@ -200,7 +201,7 @@ public class RankingSortData {
             }
         }
 
-        public static class ThingsBean {
+        public class ThingsBean implements Serializable{
             private int id;
             private String name;
             private String fullName;
@@ -535,7 +536,7 @@ public class RankingSortData {
                 this.categories = categories;
             }
 
-            public static class RecommendedAtBean {
+            public  class RecommendedAtBean  implements Serializable{
                 private String date;
                 private int timezone_type;
                 private String timezone;
@@ -565,7 +566,7 @@ public class RankingSortData {
                 }
             }
 
-            public static class LinksBean {
+            public  class LinksBean implements Serializable{
                 private String self;
                 private String html;
                 private String share;
@@ -613,7 +614,7 @@ public class RankingSortData {
                 }
             }
 
-            public static class BrandBean {
+            public  class BrandBean implements Serializable{
                 private String name;
                 private String slug;
 
@@ -634,7 +635,7 @@ public class RankingSortData {
                 }
             }
 
-            public static class CreatorBean {
+            public  class CreatorBean implements Serializable{
                 private int id;
                 private String username;
                 private String nickname;
@@ -682,7 +683,7 @@ public class RankingSortData {
                 }
             }
 
-            public static class BuylinksBean {
+            public  class BuylinksBean implements Serializable{
                 private String platform;
                 private String price;
                 private String link;
@@ -712,7 +713,7 @@ public class RankingSortData {
                 }
             }
 
-            public static class CategoriesBean {
+            public  class CategoriesBean implements Serializable{
                 private int tagId;
                 private String name;
                 private String slug;
@@ -801,7 +802,7 @@ public class RankingSortData {
                     this.links = links;
                 }
 
-                public static class LinksBean {
+                public  class LinksBean implements Serializable{
                     private String wikiHtml;
                     private String wikiShare;
                     private String things;
